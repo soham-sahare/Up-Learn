@@ -93,9 +93,8 @@
                                 <div class="card-body pb-0">
                                     <div class="row">
                                         <div class="col-xl-12">
-                                            <p class="font-xssss fw-600 lh-28 text-grey-500 pl-0">{{ data.user.about_me }}</p>
+                                            <p class="font-xssss fw-600 lh-28 text-grey-500 pl-0">{{ data.user.about_me if data.user.about_me is not none else 'No About me is set currently you can set it' }} <a href="/settings/account-information">{{ 'here' }}</a></p>
                                             <ul class="d-flex align-items-center mt-2 mb-3 float-left">
-                                                
                                                 <li class="m-1 list-inline-item"><a target="_blank" href="{{ data.user.facebook if data.user.facebook is not none else '#' }}" class="btn-round-md bg-facebook"><i class="font-xs ti-facebook text-white"></i></a></li>
                                                 <li class="m-1 list-inline-item"><a target="_blank" href="{{ data.user.github if data.user.github is not none else '#' }}" class="btn-round-md bg-twiiter"><i class="font-xs fab fa-github text-white"></i></i></a></li>
                                                 <li class="m-1 list-inline-item"><a target="_blank" href="{{ data.user.linkedin if data.user.linkedin is not none else '#' }}" class="btn-round-md bg-linkedin"><i class="font-xs ti-linkedin text-white"></i></a></li>

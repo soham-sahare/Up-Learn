@@ -29,6 +29,38 @@ def login():
             return redirect("/authentication/login")
     return render_template("authentication/login.html")
 
+@authentication.route("/authentication/register", methods = ['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect('/')
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        confirm_password = request.form["confirm_password"]
+        if len(name) < 7:
+            flash("Username should be greater than 6 characters.")
+            return redirect("/authentication/register")
+        if UserModel.query.filter_by(name=name).first():
+            flash("Username already Present. Please try with other username.")
+            return redirect("/authentication/register")
+        if UserModel.query.filter_by(email=email).first():
+            flash("Email already Present. Please try with other email.")
+            return redirect("/authentication/register")
+        if len(password) < 7:
+            flash("Password should be greater than 6 characters.")
+            return redirect("/authentication/register")
+        if password != confirm_password:
+            flash("Passwords did'nt matched.")
+            return redirect("/authentication/register")
+        user = UserModel(email=email, name=name)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        flash("Account created. Now Login.")
+        return redirect('/authentication/login')
+    return render_template("authentication/register.html")
+
 @authentication.route("/authentication/forgot-password", methods = ['GET', 'POST'])
 def forgot():
     if current_user.is_authenticated:
@@ -78,37 +110,6 @@ def reset_with_token(token):
     else:
         flash("URL Expired.")
         return render_template("authentication/reset.html", url = "#")
-
-@authentication.route("/authentication/register", methods = ['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect('/')
-    if request.method == "POST":
-        name = request.form["name"]
-        email = request.form["email"]
-        password = request.form["password"]
-        confirm_password = request.form["confirm_password"]
-        if len(name) < 7:
-            flash("Username should be greater than 6 characters.")
-            return redirect("/authentication/register")
-        if UserModel.query.filter_by(name=name).first():
-            flash("Username already Present. Please try with other username.")
-            return redirect("/authentication/register")
-        if UserModel.query.filter_by(email=email).first():
-            flash("Email already Present. Please try with other email.")
-            return redirect("/authentication/register")
-        if len(password) < 7:
-            flash("Password should be greater than 6 characters.")
-            return redirect("/authentication/register")
-        if password != confirm_password:
-            flash("Passwords did'nt matched.")
-            return redirect("/authentication/register")
-        user = UserModel(email=email, name=name)
-        user.set_password(password)
-        db.session.add(user)
-        db.session.commit()
-        return redirect('/authentication/login')
-    return render_template("authentication/register.html")
 
 @authentication.route('/authentication/logout')
 @login_required
