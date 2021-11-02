@@ -4,6 +4,7 @@ from utils import *
 from views.projects.views import projects_
 from views.authentication.views import authentication
 from views.settings.views import settings_
+from views.friends.views import friends_
 ###############################################################
 
 app = Flask(__name__)
@@ -21,6 +22,7 @@ COOKIE_TIME_OUT = 60*5
 app.register_blueprint(projects_)
 app.register_blueprint(authentication)
 app.register_blueprint(settings_)
+app.register_blueprint(friends_)
 #################################################################
 
 db.init_app(app)
