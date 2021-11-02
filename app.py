@@ -4,7 +4,8 @@ from utils import *
 from views.projects.views import projects_
 from views.authentication.views import authentication_
 from views.settings.views import settings_
-from views.friends.views import friends, friends_
+from views.friends.views import friends_
+from views.jobsandinternships.views import jobsandinternships_
 ###############################################################
 
 app = Flask(__name__)
@@ -23,6 +24,7 @@ app.register_blueprint(projects_)
 app.register_blueprint(authentication_)
 app.register_blueprint(settings_)
 app.register_blueprint(friends_)
+app.register_blueprint(jobsandinternships_)
 #################################################################
 
 db.init_app(app)
