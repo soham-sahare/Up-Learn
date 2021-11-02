@@ -7,7 +7,6 @@ friends_ = Blueprint('friends', __name__)
 def friends():
     users = UserModel.query.all()
     friends = FriendModel.query.all()
-
     data = {
         "username": session["username"],
         "friends": friends,
@@ -38,3 +37,10 @@ def reject(user1, user2):
     friends = FriendModel.query.filter_by(user1 = user1, user2 = user2).delete()
     db.session.commit()
     return redirect("/friends")
+
+@friends_.route("/friends/remove/<user1>/<user2>", methods = ["GET", "POST"])
+@login_required
+def remove(user1, user2):
+    friends = FriendModel.query.filter_by(user1 = user1, user2 = user2).delete()
+    db.session.commit()
+    return redirect("/user-profile/{}".format(session["username"]))

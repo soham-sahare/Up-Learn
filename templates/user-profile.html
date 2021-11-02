@@ -149,25 +149,48 @@
                                 <div class="card-body mb-lg-3 pb-0"><h2 class="fw-400 font-lg d-block">My <b>Connections</b> </h2></div>
                                 <div class="card-body pb-0">
                                     <div class="row">
-                                        <div class="col-xxxl-3 col-xl-4 col-lg-6 col-md-6 col-sm-6 mb-4">
-                                            <div class="card d-block w-100 border-0 shadow-xss rounded-lg overflow-hidden mb-4">
-                                                <div class="card-body position-relative h100 bg-gradiant-bottom bg-image-cover bg-image-center" style="background-image: url({{ url_for('static', filename='images/bb-16.png') }});"></div>
-                                                <div class="card-body d-block w-100 pl-2 pr-2 text-center">
-                                                    <figure class="avatar ml-auto mr-auto mb-0 mt--6 position-relative w75 z-index-1"><img src="{{ url_for('static', filename='images/user-5.png') }}" alt="image" class="float-right p-1 bg-white rounded-circle w-100"></figure>
-                                                    <div class="clearfix"></div>
-                                                    <h4 class="fw-700 font-xsss mt-3 mb-1">Stephen Grider </h4>
-                                                    <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-2">support@gmail.com</p>
-                                                    <div class="clearfix"></div>
-                                                    <ul class="text-center d-block mt-3 list-inline ml-2 mr-2 mb-3">
-                                                        <li class="m-1 list-inline-item"><a href="#" class="btn-round-md bg-facebook"><i class="font-xs ti-facebook text-white"></i></a></li>
-                                                        <li class="m-1 list-inline-item"><a href="#" class="btn-round-md bg-twiiter"><i class="font-xs fab fa-github text-white"></i></i></a></li>
-                                                        <li class="m-1 list-inline-item"><a href="#" class="btn-round-md bg-linkedin"><i class="font-xs ti-linkedin text-white"></i></a></li>
-                                                        <li class="m-1 list-inline-item"><a href="#" class="btn-round-md bg-instagram"><i class="font-xs ti-instagram text-white"></i></a></li>
-                                                    </ul>
-                                                    <a href="#" class="mt-4 mb-4 p-0 btn p-2 lh-24 w100 ml-1 ls-3 d-inline-block rounded-xl bg-current font-xsssss fw-700 ls-lg text-white">FOLLOW</a>
-                                                </div>
-                                            </div>                           
-                                        </div>
+                                        {% for i in data.friend2 %}
+                                            {% for j in data.all_users %}
+                                                {% if i.user1  == j.name %}
+                                                    <div class="col-xxxl-3 col-xl-4 col-lg-6 col-md-6 col-sm-6 mb-4">
+                                                        <div class="card d-block w-100 border-0 shadow-xss rounded-lg overflow-hidden mb-4">
+                                                            <div class="card-body position-relative h100 bg-gradiant-bottom bg-image-cover bg-image-center" style="background-image: url({{ url_for('static', filename='images/bb-16.png') }});"></div>
+                                                            <div class="card-body d-block w-100 pl-2 pr-2 text-center">
+                                                                <figure class="avatar ml-auto mr-auto mb-0 mt--6 position-relative w75 z-index-1"><img src="{{ url_for('static', filename='images/user-5.png') }}" alt="image" class="float-right p-1 bg-white rounded-circle w-100"></figure>
+                                                                <div class="clearfix"></div>
+                                                                <a href="/user-profile/{{ j.name }}"><h4 class="fw-700 font-xsss mt-3 mb-1">{{ j.name }}</h4></a>
+                                                                <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-2">{{ j.email }}</p>
+                                                                <div class="clearfix"></div>
+                                                                {% if data.my_name == data.user.name %}
+                                                                    <a href="/friends/remove/{{ j.name }}/{{ data.my_name }}" class="mt-4 mb-4 p-0 btn p-2 lh-24 w100 ml-1 ls-3 d-inline-block rounded-xl bg-danger font-xsssss fw-700 ls-lg text-white">Remove</a>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>                           
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+
+                                        {% for i in data.friend1 %}
+                                            {% for j in data.all_users %}
+                                                {% if i.user2  == j.name %}
+                                                    <div class="col-xxxl-3 col-xl-4 col-lg-6 col-md-6 col-sm-6 mb-4">
+                                                        <div class="card d-block w-100 border-0 shadow-xss rounded-lg overflow-hidden mb-4">
+                                                            <div class="card-body position-relative h100 bg-gradiant-bottom bg-image-cover bg-image-center" style="background-image: url({{ url_for('static', filename='images/bb-16.png') }});"></div>
+                                                            <div class="card-body d-block w-100 pl-2 pr-2 text-center">
+                                                                <figure class="avatar ml-auto mr-auto mb-0 mt--6 position-relative w75 z-index-1"><img src="{{ url_for('static', filename='images/user-5.png') }}" alt="image" class="float-right p-1 bg-white rounded-circle w-100"></figure>
+                                                                <div class="clearfix"></div>
+                                                                <a href="/user-profile/{{ j.name }}"><h4 class="fw-700 font-xsss mt-3 mb-1">{{ j.name }}</h4></a>
+                                                                <p class="fw-500 font-xsssss text-grey-500 mt-0 mb-2">{{ j.email }}</p>
+                                                                <div class="clearfix"></div>
+                                                                {% if data.my_name == data.user.name %}
+                                                                    <a href="/friends/remove/{{ data.my_name }}/{{ j.name }}" class="mt-4 mb-4 p-0 btn p-2 lh-24 w100 ml-1 ls-3 d-inline-block rounded-xl bg-danger font-xsssss fw-700 ls-lg text-white">Remove</a>
+                                                                {% endif %}                                                            </div>
+                                                        </div>                           
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
                                     </div>
                                 </div>  
                             </div>

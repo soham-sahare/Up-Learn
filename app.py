@@ -4,7 +4,7 @@ from utils import *
 from views.projects.views import projects_
 from views.authentication.views import authentication_
 from views.settings.views import settings_
-from views.friends.views import friends_
+from views.friends.views import friends, friends_
 ###############################################################
 
 app = Flask(__name__)
@@ -54,10 +54,17 @@ def index():
 def user_profile(id):
     user = UserModel.query.filter_by(name = id).first()
     projects = ProjectsModel.query.filter_by(user_name = id)
+    friend1 = FriendModel.query.filter_by(user1 = id, status = 1).all()
+    friend2 = FriendModel.query.filter_by(user2 = id, status = 1).all()
+    all_users = UserModel.query.all()
     data = {
         "projects": projects,
         "my_id": session["id"],
         "user": user,
+        "all_users": all_users,
+        "friend1": friend1,
+        "friend2": friend2,
+        "my_name": session["username"]
     }
     return render_template("user-profile.html", data=data)
 
