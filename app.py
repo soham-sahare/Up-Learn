@@ -51,11 +51,11 @@ def index():
 @login_required
 def user_profile(id):
     user = UserModel.query.filter_by(name = id).first()
-    projects = ProjectsModel.query.filter_by(user_id = session["id"])
+    projects = ProjectsModel.query.filter_by(user_name = id)
     data = {
         "projects": projects,
         "my_id": session["id"],
-        "user": user
+        "user": user,
     }
     return render_template("user-profile.html", data=data)
 

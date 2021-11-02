@@ -64,7 +64,7 @@
                                     <h4 class="fw-700 font-md text-white mt-3 mb-1">{{ data.user.name }} <i class="ti-check font-xssss btn-round-xs bg-success text-white ml-1"></i></h4>
                                     <span class="font-xssss fw-600 text-grey-500 d-inline-block ml-0">{{ data.user.email }}</span>
                                     <br>
-                                    <span class="font-xssss fw-600 text-grey-500 d-inline-block ml-1">{{ data.user.title }}</span>
+                                    <span class="font-xssss fw-600 text-grey-500 d-inline-block ml-1">{{ data.user.title if data.user.title is not none else '#' }}</span>
                                 </div>
                                 <div class="col-xl-4 col-lg-6 d-block">
                                     <h2 class="display5-size text-white fw-700 lh-1 mr-3">98 <i class="feather-arrow-up-right text-success font-xl"></i></h2>
@@ -72,7 +72,6 @@
 
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="card d-block w-100 border-0 shadow-xss rounded-lg overflow-hidden mb-4">
@@ -86,6 +85,7 @@
                             <!-- <li class="list-inline-item"><a class="fw-700 pb-sm-5 pt-sm-5 xs-mb-2 mr-sm-5 font-xssss text-grey-500 ls-3 d-inline-block text-uppercase" href="#navtabs7" data-toggle="tab">LIVE</a></li> -->
                         </ul>
                     </div>
+                    
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="navtabs0">
                             <div class="card d-block w-100 border-0 shadow-xss rounded-lg overflow-hidden p-lg-4 p-2">
@@ -93,7 +93,13 @@
                                 <div class="card-body pb-0">
                                     <div class="row">
                                         <div class="col-xl-12">
-                                            <p class="font-xssss fw-600 lh-28 text-grey-500 pl-0">{{ data.user.about_me if data.user.about_me is not none else 'No About me is set currently you can set it' }} <a href="/settings/account-information">{{ 'here' }}</a></p>
+                                           
+                                            {% if data.user.about_me is none %}
+                                                <p class="font-xssss fw-600 lh-28 text-grey-500 pl-0">No about me is set currently.</p>
+                                                {% if data.user.id == data.my_id %}
+                                                    <p class="font-xssss fw-600 lh-28 text-grey-500 pl-0">You can set it <a href="/settings/account-information">here</a></p>
+                                                {% endif %}
+                                            {% endif %}
                                             <ul class="d-flex align-items-center mt-2 mb-3 float-left">
                                                 <li class="m-1 list-inline-item"><a target="_blank" href="{{ data.user.facebook if data.user.facebook is not none else '#' }}" class="btn-round-md bg-facebook"><i class="font-xs ti-facebook text-white"></i></a></li>
                                                 <li class="m-1 list-inline-item"><a target="_blank" href="{{ data.user.github if data.user.github is not none else '#' }}" class="btn-round-md bg-twiiter"><i class="font-xs fab fa-github text-white"></i></i></a></li>
