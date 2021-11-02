@@ -2,7 +2,7 @@ from utils import *
 
 ###################### Import Blueprints ######################
 from views.projects.views import projects_
-from views.authentication.views import authentication
+from views.authentication.views import authentication_
 from views.settings.views import settings_
 from views.friends.views import friends_
 ###############################################################
@@ -20,7 +20,7 @@ COOKIE_TIME_OUT = 60*5
 
 ###################### Register Blueprints ######################
 app.register_blueprint(projects_)
-app.register_blueprint(authentication)
+app.register_blueprint(authentication_)
 app.register_blueprint(settings_)
 app.register_blueprint(friends_)
 #################################################################

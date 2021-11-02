@@ -1,14 +1,14 @@
 from utils import *
 
-authentication = Blueprint('authentication', __name__)
+authentication_ = Blueprint('authentication', __name__)
 
 ts = URLSafeTimedSerializer(os.environ.get('SECRET_KEY'))
 
-@authentication.route("/authentication")
+@authentication_.route("/authentication")
 def auth():
     return redirect("/authentication/login")
 
-@authentication.route("/authentication/login", methods = ['GET', 'POST'])
+@authentication_.route("/authentication/login", methods = ['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect('/')
@@ -29,7 +29,7 @@ def login():
             return redirect("/authentication/login")
     return render_template("authentication/login.html")
 
-@authentication.route("/authentication/register", methods = ['GET', 'POST'])
+@authentication_.route("/authentication/register", methods = ['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect('/')
@@ -61,7 +61,7 @@ def register():
         return redirect('/authentication/login')
     return render_template("authentication/register.html")
 
-@authentication.route("/authentication/forgot-password", methods = ['GET', 'POST'])
+@authentication_.route("/authentication/forgot-password", methods = ['GET', 'POST'])
 def forgot():
     if current_user.is_authenticated:
         return redirect('/')
@@ -79,7 +79,7 @@ def forgot():
         return redirect("/authentication/forgot-password")
     return render_template("authentication/forgot-password.html")
 
-@authentication.route("/authentication/reset/<token>", methods = ['GET', 'POST'])
+@authentication_.route("/authentication/reset/<token>", methods = ['GET', 'POST'])
 def reset_with_token(token):
     if current_user.is_authenticated:
         return redirect('/')
@@ -111,7 +111,7 @@ def reset_with_token(token):
         flash("URL Expired.")
         return render_template("authentication/reset.html", url = "#")
 
-@authentication.route('/authentication/logout')
+@authentication_.route('/authentication/logout')
 @login_required
 def logout():
     logout_user()
