@@ -24,4 +24,4 @@ def upload_file_():
         return redirect("/upload")
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug=True)
