@@ -73,4 +73,4 @@ def user_profile(id):
     return render_template("user-profile.html", data=data)
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug=True)
