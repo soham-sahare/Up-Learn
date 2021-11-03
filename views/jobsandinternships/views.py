@@ -5,8 +5,10 @@ jobsandinternships_ = Blueprint('jobsandinternships', __name__)
 @jobsandinternships_.route("/jobs-internships", methods = ["GET", "POST"])
 @login_required
 def jobsandinternships():
+    user = UserModel.query.filter_by(name = session["username"]).first()
     data = {
-        "username": session["username"]
+        "username": session["username"],
+        "user": user
     }
     return render_template("jobs-and-internships/jobs_and_internships.html", data=data)
 
@@ -18,7 +20,11 @@ def jobs():
 @jobsandinternships_.route("/job/<id>", methods = ["GET", "POST"])
 @login_required
 def job_id(id):
-    return render_template("jobs-and-internships/jobs.html")
+    user = UserModel.query.filter_by(name = session["username"]).first()
+    data = {
+        "user": user
+    }
+    return render_template("jobs-and-internships/jobs.html", data=data)
 
 @jobsandinternships_.route("/internships", methods = ["POST"])
 @login_required

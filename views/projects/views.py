@@ -24,10 +24,12 @@ def projects():
         db.session.commit()
         return redirect("/projects")
     projects = ProjectsModel.query.all()[::-1]
+    user = UserModel.query.filter_by(name = session["username"]).first()
     data = {
         "username": username,
         "projects": projects,
         "my_id": int(id),
+        "user": user
     }
     return render_template("projects/projects.html", data=data)
 
@@ -47,11 +49,13 @@ def projects_edit(id):
 def project_id(id):
     project = ProjectsModel.query.filter_by(id = id).first()
     comments = CommentModel.query.filter_by(project_id = id)
+    user = UserModel.query.filter_by(name = session["username"]).first()
     data = {
         "username": session["username"],
         "my_id": session["id"],
         "projects": project,
-        "comments": comments
+        "comments": comments,
+        "user": user
     }
     return render_template("projects/project-details.html",  data=data)
 

@@ -46,8 +46,10 @@ def page_not_foun_(e):
 @app.route("/", methods = ["GET", "POST"])
 @login_required
 def index():
+    user = UserModel.query.filter_by(name = session["username"]).first()
     data = {
-        "username": session["username"]
+        "username": session["username"],
+        "user": user
     }
     return render_template("index.html",  data = data)
 

@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://kit.fontawesome.com/720d275f39.js" crossorigin="anonymous"></script>
+
 </head>
 <body class="color-theme-blue mont-font">
 
@@ -65,23 +66,24 @@
                                         </div>
                                     </div>
                                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default p-0 bg-transparent border-bottom rounded-0">
-                                            <div class="panel-heading  pb-2" role="tab" id="headingOne">
+                                        <div class="panel panel-default p-0 bg-transparent border-bottom rounded-0" style="border: none;">
+                                            <div class="panel-heading  pb-2" role="tab" id="headingOne" >
                                                 <a class="panel-title fw-400 mb-0 accordion-toggle icon-none d-flex justify-content-between pr-0 collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                    <figure class="avatar mr-2 mb-0 w35 mt-1 pt-1"><img src="images/user-8.png" alt="image" class="float-right shadow-sm rounded-circle w-100"></figure>
+                                                    <figure class="avatar mr-2 mb-0 w35 mt-1 pt-1"><img src="{{ url_for('static', filename='images/user-8.png') }}" alt="image" class="float-right shadow-sm rounded-circle w-100"></figure>
                                                     <span class="font-xsss text-grey-700 pt-2 mt-1 pl-2 fw-700 mb-0 mr-auto text-dark">Aenni Mirenda </span>
                                                     <span class="font-xssss text-grey-500 pt-2 mt-1 pl-2 fw-600 mb-0 ml-auto">14.09.2020 10:23</span>
 
                                                 </a>
                                             </div>
-                                            <div id="collapseOne" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne" style="">
+                                            <div id="collapseOne" class="panel-collapse in collapse" role="tabpanel" aria-labelledby="headingOne" >
                                                 <p class="text-grey-600 mb-4 mt-4 font-xsss fw-500 text-dark">Hi Aenni, <br> <br> All individual Framer subscriptions have been grandfathered into a Pro plan at your existing rate. If you were on a Small Team plan, then all 5 seats have been converted over to Pro seats at your existing rate. <br><br> Regards,<br>Jessica </p>
                                             </div>
                                         </div>
+
                                         <div class="panel panel-default p-0 mb-0 bg-transparent border-bottom rounded-0">
                                             <div class="panel-heading pb-2" role="tab" id="headingTwo">
                                                 <a class="panel-title fw-400 mb-0 accordion-toggle icon-none collapsed d-flex justify-content-between pr-0" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    <figure class="avatar mr-2 mb-0 w35 mt-1 pt-1"><img src="images/icon2.png" alt="image" class="float-left shadow-none rounded-circle w-75 mt-1"></figure>
+                                                    <figure class="avatar mr-2 mb-0 w35 mt-1 pt-1"><img src="{{ url_for('static', filename='images/icon2.png') }}" alt="image" class="float-left shadow-none rounded-circle w-75 mt-1"></figure>
                                                     <span class="font-xsss text-grey-700 pt-2 mt-1 pl-2 fw-700 mb-0 mr-auto text-dark">You</span>
                                                     <span class="font-xssss text-grey-500 pt-2 mt-1 pl-2 fw-600 mb-0 ml-auto">14.09.2020 11:45</span>
 
@@ -93,10 +95,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                         <div class="panel panel-default p-0 bg-transparent rounded-0">
                                             <div class="panel-heading pt-1 pb-2" role="tab" id="headingThree">
                                                 <a class="panel-title fw-400 mb-0 accordion-toggle icon-none d-flex justify-content-between pr-0" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                                    <figure class="avatar mr-2 mb-0 w35 mt-1 pt-1"><img src="images/user-8.png" alt="image" class="float-right shadow-sm rounded-circle w-100"></figure>
+                                                    <figure class="avatar mr-2 mb-0 w35 mt-1 pt-1"><img src="{{ url_for('static', filename='images/user-8.png') }}" alt="image" class="float-right shadow-sm rounded-circle w-100"></figure>
                                                     <span class="font-xsss text-grey-700 pt-2 mt-1 pl-2 fw-700 mb-0 mr-auto text-dark">Aenni Mirenda </span>
                                                     <span class="font-xssss text-grey-500 pt-2 mt-1 pl-2 fw-600 mb-0 ml-auto">14.09.2020 12:23</span>
 
@@ -104,7 +107,15 @@
                                             </div>
                                             <div id="collapseThree" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingThree">
                                                 <p class="text-grey-600 mb-4 font-xsss fw-500 mt-3">Hi Aenni, <br> <br> All individual Framer subscriptions have been grandfathered into a Pro plan at your existing rate. If you were on a Small Team plan, then all 5 seats have been converted over to Pro seats at your existing rate. <br><br> Regards,<br>Jessica </p>
-                                                <textarea class="form-control mb-5 p-3 h100 bg-greylight lh-16" rows="5" placeholder="Write your message..."></textarea>
+                                                
+                                                <textarea id="summernote" name="editordata" class="form-control mb-5 p-3 h100 bg-greylight lh-16" rows="5" placeholder="Write your message..."></textarea>
+
+                                                <form class="chat-form d-block">
+                                                    <button class="bg-dark border-0 btn-round-md float-left"><i class="ti-microphone text-white lh-4 font-md"></i></button>
+                                                    <button class="bg-dark border-0 btn-round-md ml-2 float-left"><i class="ti-clip text-white lh-4 font-md"></i></button>
+                                                    <button class="bg-dark border-0 btn-round-md ml-2 float-left"><i class="ti-image text-white lh-4 font-md"></i></button>
+                                                    <button class="bg-current border-0 p-0 float-right w200 text-white fw-600 font-xsss text-uppercase">Send</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -112,14 +123,7 @@
                                 </div>
                                  
                             </div>
-                            <div class="chat-bottom dark-bg p-3 border-top border-bottom" style="width: 98%;">
-                                <form class="chat-form d-block">
-                                    <button class="bg-dark border-0 btn-round-md float-left"><i class="ti-microphone text-white lh-4 font-md"></i></button>
-                                    <button class="bg-dark border-0 btn-round-md ml-2 float-left"><i class="ti-clip text-white lh-4 font-md"></i></button>
-                                    <button class="bg-dark border-0 btn-round-md ml-2 float-left"><i class="ti-image text-white lh-4 font-md"></i></button>
-                                    <button class="bg-current border-0 p-0 float-right w200 text-white fw-600 font-xsss text-uppercase">Send</button>
-                                </form>
-                            </div> 
+                           
                         </div>
 
                      </div>
@@ -130,9 +134,9 @@
                             <div class="card-body p-2 d-block text-center bg-no-repeat bg-image-topcenter" style="background-image: url('/static/images/user-pattern.png');">
                                 <a href="/settings" class="position-absolute right-0 mr-4"><i class="feather-edit text-grey-500 font-xs"></i></a>
                                
-                                <figure class="avatar ml-auto mr-auto mb-0 mt-2 w90"><img src="{{ url_for('static', filename='images/user-6.png') }}" alt="image" class="float-right shadow-sm rounded-circle w-100"></figure>
+                                <figure class="avatar ml-auto mr-auto mb-0 mt-2 w90"><img src="{{ url_for('static', filename='Uploads/profile-picture/'+data.user.profile_pic) if data.user.profile_pic is not none else url_for('static', filename='images/user-6.png') }}" alt="image" class="float-right shadow-sm rounded-circle w-100"></figure>
                                 <div class="clearfix"></div>
-                                <a href="/user-profile/ data.username }}"><h2 class="text-black font-xss lh-3 fw-700 mt-3 mb-1">data.username }}</h2></a>
+                                <a href="/user-profile/ data.username }}"><h2 class="text-black font-xss lh-3 fw-700 mt-3 mb-1">{{ data.user.name }}</h2></a>
                                 <h4 class="text-grey-500 font-xssss mt-0"><span class="d-inline-block bg-success btn-round-xss m-0"></span> Available</h4>
                                 <div class="clearfix"></div>
                             </div>

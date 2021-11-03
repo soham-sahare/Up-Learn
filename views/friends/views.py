@@ -7,10 +7,12 @@ friends_ = Blueprint('friends', __name__)
 def friends():
     users = UserModel.query.all()
     friends = FriendModel.query.all()
+    user = UserModel.query.filter_by(name = session["username"]).first()
     data = {
         "username": session["username"],
         "friends": friends,
-        "all_users": users
+        "all_users": users,
+        "user": user
     }
     return render_template("friends/friends.html", data = data)
 

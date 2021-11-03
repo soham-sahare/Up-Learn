@@ -2,11 +2,16 @@ from utils import *
 
 settings_ = Blueprint('settings', __name__)
 
+UPLOAD_FOLDER = "static/Uploads/profile-picture"
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
 @settings_.route("/settings", methods = ["GET", "POST"])
 @login_required
 def settings():
+    user = UserModel.query.filter_by(id = session["id"]).first()
     data = {
-        "username": session["username"]
+        "username": session["username"],
+        "user": user
     }
     return render_template("/settings/settings.html", data=data)
 
@@ -28,6 +33,27 @@ def account_information():
         user.phone = request.form["phone"]
         user.about_me = request.form["about_me"]
         user.title = request.form["title"]
+        def allowed_file(filename):
+            return '.' in filename and \
+                filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+        if 'profile' in request.files:
+            file = request.files['profile']
+            if file.filename != '':
+                if file and allowed_file(file.filename):
+                    name = file.filename
+                    extension = name.split(".")[-1]
+                    filename = secrets.token_hex(8) + "." + extension
+                    file.save(os.path.join(UPLOAD_FOLDER, filename))
+                    
+                    if user.profile_pic is not None:
+                        Delete_path = UPLOAD_FOLDER + "/" +user.profile_pic
+                        os.remove(Delete_path)
+                        
+                    user.profile_pic = filename
+                else:
+                    flash("The file with current extension is not allowed.")
+                    return redirect("/settings/account-information")
+
         db.session.commit()
         flash("Data Saved.")
         return redirect("/settings/account-information")

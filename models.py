@@ -21,6 +21,7 @@ class UserModel(UserMixin, db.Model):
     linkedin = db.Column(db.String(100))
     github = db.Column(db.String(100))
     instagram = db.Column(db.String(100))
+    profile_pic = db.Column(db.String(15))
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

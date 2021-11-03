@@ -13,6 +13,7 @@ from itsdangerous import URLSafeTimedSerializer
 from models import UserModel, ProjectsModel, db, login, CommentModel, FriendModel
 from dotenv import load_dotenv
 import datetime 
+import secrets
 
 load_dotenv()
 
