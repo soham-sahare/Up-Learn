@@ -69,7 +69,7 @@
                                     </div> -->
                                 </div>
 
-                                <a href=""><span class="font-xssss fw-700 text-grey-900 d-inline-block ml-0 text-dark"><b>{{ data.projects.user_name }}</b></span></a>
+                                <a href="/user-profile/{{ data.projects.user_name }}"><span class="font-xssss fw-700 text-grey-900 d-inline-block ml-0 text-dark"><b>{{ data.projects.user_name }}</b></span></a>
                                 <span class="dot ml-2 mr-2 d-inline-block btn-round-xss bg-grey"></span>
                                 {% for i in data.projects.tags.split(" ") %}
                                     <span class="font-xssss fw-700 text-primary d-inline-block ml-1 "><b>{{ i }}</b></span>

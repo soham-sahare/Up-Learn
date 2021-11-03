@@ -59,7 +59,12 @@ def project_id(id):
 @login_required
 def project_comment(id):
     comment = request.form["comment"]
-    comment = CommentModel(comment=comment, project_id=id, user_id=session["id"], user_name=session["username"])
+    current_time = datetime.datetime.now() 
+    date = current_time.strftime("%d/%m/%Y")
+    hour = current_time.hour
+    minutes = current_time.minute
+    string = date + " " + str(hour) + ":" + str(minutes)
+    comment = CommentModel(comment=comment, project_id=id, user_id=session["id"], user_name=session["username"], time = string)
     db.session.add(comment)
     db.session.commit()
     return redirect("/project/{}".format(id))

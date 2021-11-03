@@ -47,7 +47,7 @@ class CommentModel(UserMixin, db.Model):
     project_id = db.Column(db.Integer)
     user_id = db.Column(db.Integer)
     user_name = db.Column(db.String(100))
-    time = db.Column(db.DateTime, server_default=db.func.now())
+    time = db.Column(db.String(100))
 
 class FriendModel(UserMixin, db.Model):
     __tablename__ = 'friends'
