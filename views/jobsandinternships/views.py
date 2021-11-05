@@ -1,3 +1,4 @@
+import re
 from utils import *
 
 jobsandinternships_ = Blueprint('jobsandinternships', __name__)
@@ -6,9 +7,11 @@ jobsandinternships_ = Blueprint('jobsandinternships', __name__)
 @login_required
 def jobsandinternships():
     user = UserModel.query.filter_by(name = session["username"]).first()
+    internships = InternshipModel.query.all()
     data = {
         "username": session["username"],
-        "user": user
+        "user": user,
+        "internships": internships,
     }
     return render_template("jobs-and-internships/jobs_and_internships.html", data=data)
 
@@ -29,7 +32,25 @@ def job_id(id):
 @jobsandinternships_.route("/internships", methods = ["POST"])
 @login_required
 def internships():
-    return "Internships"
+    internship_name = request.form["internship_name"]
+    rte_body = request.form["rte_body"]
+    arr = []
+    for f in request.files.getlist('files[]'):
+        name = f.filename
+        extension = name.split(".")[-1]
+        filename = secrets.token_hex(8) + "." + extension
+        arr.append(filename)
+        f.save(os.path.join('static/Uploads/internship-files', filename))
+    attachments = " ".join([i for i in arr])
+    internship = InternshipModel(
+        internship_name = internship_name,
+        attachments = attachments,
+        rte_body = rte_body,
+        user_name = session["username"]
+    )
+    db.session.add(internship)
+    db.session.commit()
+    return redirect("/jobs-internships")
 
 @jobsandinternships_.route("/internship/<id>", methods = ["GET", "POST"])
 @login_required

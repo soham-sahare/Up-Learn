@@ -58,6 +58,16 @@ class FriendModel(UserMixin, db.Model):
     user2 = db.Column(db.Text)
     status = db.Column(db.Integer)
 
+class InternshipModel(UserMixin, db.Model):
+    __tablename__ = 'internships'
+
+    id = db.Column(db.Integer, primary_key=True)
+    internship_name = db.Column(db.Text)
+    rte_body = db.Column(db.Text)
+    attachments = db.Column(db.Text)
+    user_name = db.Column(db.Text)
+    image = db.Column(db.String(15))
+
 @login.user_loader
 def load_user(id):
     return UserModel.query.get(int(id))

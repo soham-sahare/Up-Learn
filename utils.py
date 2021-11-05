@@ -10,7 +10,7 @@ from flask_login import login_required, current_user, login_user, logout_user
 from datetime import timedelta
 from itsdangerous import URLSafeTimedSerializer
 
-from models import UserModel, ProjectsModel, db, login, CommentModel, FriendModel
+from models import UserModel, ProjectsModel, db, login, CommentModel, FriendModel, InternshipModel
 from dotenv import load_dotenv
 import datetime 
 import secrets
