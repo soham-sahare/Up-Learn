@@ -71,8 +71,12 @@
                                     {% endfor %}
                                     <div class="clearfix"></div>
                                     <ul class="memberlist mt-2 mb-1">
-                                        <li><a href="#"><img src="{{ url_for('static', filename='images/user-6.png') }}" alt="user" class="w30 d-inline-block"></a></li>
-                                        <li class="pl-4 w-auto"><a href="/user-profile/{{ i.user_name }}" class="fw-500  font-xssss" style="color: black;">{{ i.user_name }}</a></li>
+                                        {% for j in data.all_users %}
+                                            {% if j.name == i.user_name %}
+                                                <li><a href="#"><img src="{{ url_for('static', filename='Uploads/profile-picture/'+j.profile_pic) if j.profile_pic is not none else url_for('static', filename='images/user-6.png') }}" alt="user" class="w30 d-inline-block"></a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                            <li class="pl-4 w-auto"><a href="/user-profile/{{ i.user_name }}" class="fw-500  font-xssss" style="color: black;">{{ i.user_name }}</a></li>
                                     </ul>
                                     <a href="{{ i.link }}" target="_blank" class="p-2 mt-4 d-inline-block text-white fw-700 lh-30 rounded-lg w200 text-center font-xl ls-3 bg-current"><i class="fab fa-github"></i></a>
                                 </div>

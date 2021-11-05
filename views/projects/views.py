@@ -25,11 +25,13 @@ def projects():
         return redirect("/projects")
     projects = ProjectsModel.query.all()[::-1]
     user = UserModel.query.filter_by(name = session["username"]).first()
+    all_users = UserModel.query.all()
     data = {
         "username": username,
         "projects": projects,
         "my_id": int(id),
-        "user": user
+        "user": user,
+        "all_users": all_users
     }
     return render_template("projects/projects.html", data=data)
 
