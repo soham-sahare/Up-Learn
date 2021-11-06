@@ -42,11 +42,13 @@ def internships():
         arr.append(filename)
         f.save(os.path.join('static/Uploads/internship-files', filename))
     attachments = " ".join([i for i in arr])
+    date = getCurrentDate()
     internship = InternshipModel(
         internship_name = internship_name,
         attachments = attachments,
         rte_body = rte_body,
-        user_name = session["username"]
+        user_name = session["username"],
+        date = date
     )
     db.session.add(internship)
     db.session.commit()
@@ -55,4 +57,10 @@ def internships():
 @jobsandinternships_.route("/internship/<id>", methods = ["GET", "POST"])
 @login_required
 def internship_id(id):
-    return "Internships {}".format(id)
+    internship = InternshipModel.query.filter_by(id = id).first()
+    user = UserModel.query.filter_by(name = session["username"]).first()
+    data = {
+        "user": user,
+        "internship": internship
+    }
+    return render_template("jobs-and-internships/internship.html", data=data)

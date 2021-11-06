@@ -65,8 +65,9 @@ class InternshipModel(UserMixin, db.Model):
     internship_name = db.Column(db.Text)
     rte_body = db.Column(db.Text)
     attachments = db.Column(db.Text)
-    user_name = db.Column(db.Text)
     image = db.Column(db.String(15))
+    date = db.Column(db.String(100))
+    user_name = db.Column(db.Text)
 
 @login.user_loader
 def load_user(id):
