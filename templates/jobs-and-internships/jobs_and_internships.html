@@ -75,7 +75,6 @@
                                         <img src="{{ url_for('static', filename='Uploads/profile-picture/'+i.image) if i.image is not none else url_for('static', filename='images/user-6.png') }}" alt="icon" class="p-1">
                                     </a>
                                     <a href="/internship/{{ i.id }}"><h4 class="fw-700 font-xs mt-4">{{ i.internship_name }}</h4></a>
-                                    <p class="fw-500 font-xssss text-grey-500 mt-3" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;">{{ i.date }}</p>
                                     <div class="clearfix"></div>
                                     <span class="font-xsssss fw-700 pl-3 pr-3 lh-32 text-uppercase rounded-lg ls-2 bg-lightblue d-inline-block text-grey-800 mb-1 mr-1">Internship</span>
                                     <div class="clearfix"></div>
