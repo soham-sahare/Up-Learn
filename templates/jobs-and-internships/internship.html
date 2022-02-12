@@ -78,28 +78,17 @@
                                             <div id="collapseOne" class="panel-collapse in collapse show" role="tabpanel" aria-labelledby="headingOne" >
                                                 <p id="rte" class="text-grey-600 mb-4 mt-4 font-xsss fw-500 text-dark"></p>
                                                 <script>
-                                                    var support = (function () {
-                                                        if (!window.DOMParser) return false;
-                                                        var parser = new DOMParser();
-                                                        try {
-                                                            parser.parseFromString('x', 'text/html');
-                                                        } catch(err) {
-                                                            return false;
-                                                        }
-                                                        return true;
-                                                    })();
+                                                    
+                                                    function convertToPlain(html){
+                                                        var tempDivElement = document.createElement("div");
+                                                        tempDivElement.innerHTML = html;
+                                                        return tempDivElement.textContent || tempDivElement.innerText || "";
+                                                    }
+                                                    var htmlString= '{{ data.internship.rte_body }}'
+                                                    console.log(convertToPlain(htmlString));
 
-                                                    var stringToHTML = function (str) {
-                                                        if (support) {
-                                                            var parser = new DOMParser();
-                                                            var doc = parser.parseFromString(str, 'text/html');
-                                                            return doc.body;
-                                                        }
-                                                        var dom = document.createElement('div');
-                                                        dom.innerHTML = str;
-                                                        return dom;
-                                                    };
-                                                    document.getElementById("rte").innerHTML =  '{{ data.internship.rte_body }}'
+                                                    document.getElementById("rte").innerHTML = htmlString
+
                                                 </script>
                                             </div>
                                         </div>
@@ -124,7 +113,7 @@
                                             <div class="panel-heading pt-1 pb-2" role="tab" id="headingThree">
                                                 <a class="panel-title fw-400 mb-0 accordion-toggle icon-none d-flex justify-content-between pr-0" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                                     <figure class="avatar mr-2 mb-0 w35 mt-1 pt-1"><img src="{{ url_for('static', filename='Uploads/profile-picture/'+data.user.profile_pic) if data.user.profile_pic is not none else url_for('static', filename='images/user-6.png') }}" alt="image" class="float-right shadow-sm rounded-circle w-100"></figure>
-                                                    <span class="font-xsss text-grey-700 pt-2 mt-1 pl-2 fw-700 mb-0 mr-auto text-dark">Aenni Mirenda </span>
+                                                    <span class="font-xsss text-grey-700 pt-2 mt-1 pl-2 fw-700 mb-0 mr-auto text-dark">{{ data.user.name }} </span>
                                                     <span class="font-xssss text-grey-500 pt-2 mt-1 pl-2 fw-600 mb-0 ml-auto">14.09.2020 12:23</span>
 
                                                 </a>

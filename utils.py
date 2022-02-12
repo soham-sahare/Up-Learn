@@ -17,8 +17,6 @@ import secrets
 
 load_dotenv()
 
-
-
 EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 
