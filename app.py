@@ -17,7 +17,7 @@ app.config["PERMANENT_SESSION_LIFETIME"] =  timedelta(minutes=10)
 ts = URLSafeTimedSerializer(app.config["SECRET_KEY"])
 
 global COOKIE_TIME_OUT
-COOKIE_TIME_OUT = 60*5 
+COOKIE_TIME_OUT = 60*5
 
 ###################### Register Blueprints ######################
 app.register_blueprint(projects_)
